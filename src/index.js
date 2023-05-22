@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.css";
 import {BrowserRouter as Router} from "react-router-dom";
+import {ResultContextProvider} from "./contexts/ResultContextProvider";
 
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
+  <ResultContextProvider>
+    <Router>
+      <App />
+    </Router>
+  </ResultContextProvider>,
   document.getElementById("root")
 );
