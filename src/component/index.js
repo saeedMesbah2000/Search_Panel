@@ -1,5 +1,5 @@
 import Footer from "./Footer";
 import Navbar from "./Navbar";
-import Routes from "./Routes";
+import MyRoutes from "./MyRoutes";
 
-export {Footer, Navbar, Routes};
+export {Footer, Navbar, MyRoutes};
