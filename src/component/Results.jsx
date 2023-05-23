@@ -12,11 +12,35 @@ const Results = () => {
   // getting images , search
   const location = useLocation();
 
+  useEffect(() => {
+    // getResults("/search/?query=word cup&num=10");
+  }, []);
+
   if (isLoading) {
     return <Loading />;
   }
 
-  return <div>Results</div>;
+  console.log(location.pathname);
+
+  switch (location.pathname) {
+    case "/search":
+      return (
+        <div className="flex flex-wrap justify-between my-6 sm:px-56 ">
+          {/* {results?.results?.map((result, index) => {
+            const {link, title} = result;
+            return
+          })} */}
+        </div>
+      );
+      break;
+
+    case "/imagesearch":
+      return "Image Search";
+      break;
+
+    default:
+      return "Error";
+  }
 };
 
 export default Results;
