@@ -6,37 +6,64 @@ import Loading from "./Loading";
 import {useStateContext} from "../contexts/ResultContextProvider";
 
 const Results = () => {
-  const {getResults, setSearchTerm, results, isLoading, searchTerm} =
+  const {getResults, results, searchTerm, setSearchTerm, loading} =
     useStateContext();
 
   // getting images , search
   const location = useLocation();
 
   useEffect(() => {
-    // getResults("/search/?query=word cup&num=10");
-  }, []);
+    if (searchTerm) {
+      getResults(`${location.pathname}/?query=${searchTerm}&num=20`);
+    }
+  }, [searchTerm, location.pathname]);
 
-  if (isLoading) {
+  if (loading) {
     return <Loading />;
   }
-
-  console.log(location.pathname);
 
   switch (location.pathname) {
     case "/search":
       return (
         <div className="flex flex-wrap justify-between my-6 sm:px-56 ">
-          {/* {results?.results?.map((result, index) => {
+          {results?.items?.map((result, index) => {
             const {link, title} = result;
-            return
-          })} */}
+            return (
+              <div key={index} className="md:w-2/5 w-full mt-3">
+                <a href={link} target="_blank" rel="noreferrer">
+                  <p className="text-sm ">
+                    {link.length > 30 ? link.substring(0, 30) : link}
+                  </p>
+                  <p className="text-lg hover:underline dark:text-blue-300 text-blue-700">
+                    {title}
+                  </p>
+                </a>
+              </div>
+            );
+          })}
         </div>
       );
-      break;
 
     case "/imagesearch":
-      return "Image Search";
-      break;
+      return (
+        <div className="flex flex-wrap justify-center items-center mt-3">
+          {results?.items?.map((result, index) => {
+            const {thumbnailImageUrl, title, contextLink} = result;
+
+            return (
+              <a
+                className="sm:p3 p-5"
+                href={contextLink}
+                key={index}
+                target="_blank"
+                rel="noreferrer">
+                <img src={thumbnailImageUrl} alt={title} loading="lazy" />
+                <p className="w-36 break-words text-sm mt-2">{title}</p>
+              </a>
+            );
+          })}
+        </div>
+      );
 
     default:
       return "Error";

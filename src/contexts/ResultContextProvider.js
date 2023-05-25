@@ -7,7 +7,7 @@ const baseUrl = "https://google-search72.p.rapidapi.com";
 export const ResultContextProvider = ({children}) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState("word cup");
 
   const getResults = async (url) => {
     setLoading(true);
