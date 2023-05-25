@@ -9,13 +9,14 @@ const Results = () => {
   const {getResults, results, searchTerm, setSearchTerm, loading} =
     useStateContext();
 
-  // getting images , search
+  // getting imagesearch , search path names
   const location = useLocation();
 
   useEffect(() => {
     if (searchTerm) {
       getResults(`${location.pathname}/?query=${searchTerm}&num=20`);
     }
+    console.log(`this is results : ${results.items}`);
   }, [searchTerm, location.pathname]);
 
   if (loading) {
